@@ -10,12 +10,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Copyright (c) 2017, the Alpha Team.
  */
-public class RandomGraphColoring implements Generator {
+public class RandomGraphColoring extends Generator {
 
     private final boolean supportProvisioning;
 
@@ -66,8 +65,8 @@ public class RandomGraphColoring implements Generator {
         }
         HashSet<Pair<Integer,Integer>> links = new HashSet<>();
         while(links.size() < numEdges) {
-            int a = ThreadLocalRandom.current().nextInt(1, numVertices + 1);
-            int b = ThreadLocalRandom.current().nextInt(1, numVertices + 1);
+            int a = random.nextInt(numVertices) + 1;
+            int b = random.nextInt(numVertices) + 1;
             Pair<Integer, Integer> link = new Pair<>(a, b);
             if (!links.contains(link)) {
                 links.add(link);

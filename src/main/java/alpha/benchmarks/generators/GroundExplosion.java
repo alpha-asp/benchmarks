@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 /**
  * Copyright (c) 2017, the Alpha Team.
  */
-public class GroundExplosion implements Generator {
+public class GroundExplosion extends Generator {
 
     private final boolean secondVariant;
 
@@ -20,7 +20,6 @@ public class GroundExplosion implements Generator {
     }
 
 
-    @Override
     public void generate(String[] parameters) throws IOException {
 
         for (String parameter : parameters) {
