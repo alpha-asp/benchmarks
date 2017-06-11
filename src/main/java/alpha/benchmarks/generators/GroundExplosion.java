@@ -2,11 +2,7 @@ package alpha.benchmarks.generators;
 
 import alpha.benchmarks.Generator;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * Copyright (c) 2017, the Alpha Team.
@@ -25,9 +21,8 @@ public class GroundExplosion extends Generator {
         for (String parameter : parameters) {
             int domainSize = Integer.parseInt(parameter);
             String instance = generateInstance(domainSize);
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get("instance" + domainSize + ".lp"), Charset.forName("ASCII"));
-            writer.write(instance);
-            writer.close();
+            String fileName = "instance" + domainSize + ".lp";
+            writeInstanceToFile(instance, fileName);
         }
     }
 

@@ -1,6 +1,10 @@
 package alpha.benchmarks;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Random;
 
 /**
@@ -14,5 +18,11 @@ public abstract class Generator {
 
     void setRandom(Random random) {
         this.random = random;
+    }
+
+    protected void writeInstanceToFile(String instance, String fileName) throws IOException {
+        BufferedWriter writer = Files.newBufferedWriter(Paths.get(fileName), Charset.forName("ASCII"));
+        writer.write(instance);
+        writer.close();
     }
 }

@@ -1,5 +1,6 @@
 package alpha.benchmarks;
 
+import alpha.benchmarks.generators.CutEdge;
 import alpha.benchmarks.generators.GroundExplosion;
 import alpha.benchmarks.generators.RandomGraphColoring;
 
@@ -19,6 +20,8 @@ public class GeneratorFactory {
                 return new RandomGraphColoring(true);
             case "graphcoloringnosupport":
                 return new RandomGraphColoring(false);
+            case "cutedge":
+                return new CutEdge();
             default:
                 return null;
         }
