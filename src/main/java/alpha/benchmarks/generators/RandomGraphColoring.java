@@ -3,11 +3,7 @@ package alpha.benchmarks.generators;
 import alpha.benchmarks.Generator;
 import javafx.util.Pair;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -32,9 +28,8 @@ public class RandomGraphColoring extends Generator {
             int numEdges = Integer.parseInt(split[1]);
             for (int i = 1; i <= numRandomInstancesPerSetting; i++) {
                 String instance = generateInstance(numVertices, numEdges);
-                BufferedWriter writer = Files.newBufferedWriter(Paths.get("instance" + parameter + "_" + i + ".lp"), Charset.forName("ASCII"));
-                writer.write(instance);
-                writer.close();
+                String fileName = "instance" + parameter + "_" + i + ".lp";
+                writeInstanceToFile(instance, fileName);
             }
         }
     }

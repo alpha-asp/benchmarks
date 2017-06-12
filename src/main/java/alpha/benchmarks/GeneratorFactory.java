@@ -2,6 +2,7 @@ package alpha.benchmarks;
 
 import alpha.benchmarks.generators.CutEdge;
 import alpha.benchmarks.generators.GroundExplosion;
+import alpha.benchmarks.generators.NonPartitionDeletionDistanceColoring;
 import alpha.benchmarks.generators.RandomGraphColoring;
 
 /**
@@ -22,6 +23,8 @@ public class GeneratorFactory {
                 return new RandomGraphColoring(false);
             case "cutedge":
                 return new CutEdge();
+            case "nonpartitiondeletiondistancecoloring":
+                return new NonPartitionDeletionDistanceColoring();
             default:
                 return null;
         }
