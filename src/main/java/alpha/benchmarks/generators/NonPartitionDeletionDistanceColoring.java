@@ -41,7 +41,7 @@ public class NonPartitionDeletionDistanceColoring extends Generator {
                 .append("green(N) :- keep(N), not red(N), not blue(N).\n")
                 .append(":- kept_edge(N1,N2), blue(N1), blue(N2).\n")
                 .append(":- kept_edge(N1,N2), red(N1), red(N2).\n")
-                .append(":- kept_edge(N1,N2), green(N1), green(N2)\n");
+                .append(":- kept_edge(N1,N2), green(N1), green(N2).\n");
 
         for (int i = 1; i <= numVertices; i++) {
             sb.append("vertex(").append(i).append(").\n");
