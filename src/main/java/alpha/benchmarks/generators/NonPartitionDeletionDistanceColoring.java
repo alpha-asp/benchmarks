@@ -1,9 +1,11 @@
 package alpha.benchmarks.generators;
 
 import alpha.benchmarks.Generator;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Copyright (c) 2017, the Alpha Team.
@@ -12,7 +14,7 @@ public class NonPartitionDeletionDistanceColoring extends Generator {
 
     @Override
     public void generate(String[] parameters) throws IOException {
-        System.out.println("This generator expects: <numRandomInstancesPerSetting> [numVertices_percentEdges] ...");
+        System.out.println("This generator expects: <numRandomInstancesPerSetting> [numVertices_multiplierEdges] ...");
         int numRandomInstancesPerSetting = Integer.parseInt(parameters[0]);
         for (String parameter : Arrays.copyOfRange(parameters, 1, parameters.length)) {
             String[] split = parameter.split("_");
@@ -26,7 +28,7 @@ public class NonPartitionDeletionDistanceColoring extends Generator {
         }
     }
 
-    private String generateInstance(int numVertices, int percentEdges) {
+    private String generateInstance(int numVertices, int edgesMultiplier) {
         StringBuilder sb = new StringBuilder();
         sb.append("keep(X) :- vertex(X), not delete(X).\n")
                 .append("delete(X) :- vertex(X), not keep(X).\n")
@@ -46,12 +48,17 @@ public class NonPartitionDeletionDistanceColoring extends Generator {
         for (int i = 1; i <= numVertices; i++) {
             sb.append("vertex(").append(i).append(").\n");
         }
-        for (int i = 1; i <= numVertices; i++) {
-            for (int j = 1; j <= numVertices; j++) {
-                if (random.nextInt(100) + 1 <= percentEdges) {
-                    sb.append("edge(").append(i).append(",").append(j).append(").\n");
-                }
+        HashSet<Pair<Integer,Integer>> edges = new HashSet<>();
+        while(edges.size() < edgesMultiplier * numVertices) {
+            int a = random.nextInt(numVertices) + 1;
+            int b = random.nextInt(numVertices) + 1;
+            Pair<Integer, Integer> link = new Pair<>(a, b);
+            if (!edges.contains(link)) {
+                edges.add(link);
             }
+        }
+        for (Pair<Integer, Integer> edge : edges) {
+            sb.append("edge(").append(edge.getKey()).append(",").append(edge.getValue()).append(").\n");
         }
         return sb.toString();
     }
