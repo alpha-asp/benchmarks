@@ -16,9 +16,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        System.out.println("This is the benchmark generator factory.");
+        System.out.println("This is the benchmark factory.");
         if (args.length > 0 ) {
-            if ( args.length == 2 && args[0].equals("-conf")) {
+            if (args.length == 2 && args[0].toLowerCase().equals("resultparser")) {
+                System.out.println("Parsing and transforming results from benchmarks.");
+                new ResultParser().parseResults(args[1]);
+            } else if ( args.length == 2 && args[0].equals("-conf")) {
                 System.out.println("Reading configuration from: " + args[1]);
                 List<String> lines = Files.readAllLines(Paths.get(args[1]));
                 String confstring = lines.get(0);
@@ -50,7 +53,8 @@ public class Main {
 
     private static void printUsage() {
         System.out.println("Usage: <GeneratorName> [GeneratorSpecificParameters..]\n" +
-                "OR \t-conf [configfile]");
+                "OR \t-conf [configfile]\n" +
+                "OR \tResultParser [allout.dat]");
     }
 
     private static void printConfiguration(String[] config, long randomseed) {

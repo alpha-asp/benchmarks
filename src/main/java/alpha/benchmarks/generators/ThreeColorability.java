@@ -10,8 +10,7 @@ import java.util.HashSet;
 /**
  * Copyright (c) 2017, the Alpha Team.
  */
-public class NonPartitionDeletionDistanceColoring extends Generator {
-
+public class ThreeColorability extends Generator {
     @Override
     public void generate(String[] parameters) throws IOException {
         System.out.println("This generator expects: <numRandomInstancesPerSetting> [numVertices_multiplierEdges] ...");
@@ -30,20 +29,13 @@ public class NonPartitionDeletionDistanceColoring extends Generator {
 
     private String generateInstance(int numVertices, int edgesMultiplier) {
         StringBuilder sb = new StringBuilder();
-        sb.append("keep(X) :- vertex(X), not delete(X).\n")
-                .append("delete(X) :- vertex(X), not keep(X).\n")
-                .append(":- delete(X), vertex(Y), not keep(Y), X != Y.\n")
-                .append("kept_edge(V1, V2) :- keep(V1), keep(V2), edge(V1, V2).\n")
-                .append("reachable(X, Y) :- kept_edge(X, Y).\n")
-                .append("reachable(X, Z) :- delete(D), edge(X, D), reachable(X, Y), reachable(Y, Z).\n")
-                .append(":- delete(D), edge(V1, D), edge(D, V2), not reachable(V1, V2).\n");
-
-        sb.append("blue(N) :- keep(N), not red(N), not green(N).\n")
-                .append("red(N) :- keep(N), not blue(N), not green(N).\n")
-                .append("green(N) :- keep(N), not red(N), not blue(N).\n")
-                .append(":- kept_edge(N1,N2), blue(N1), blue(N2).\n")
-                .append(":- kept_edge(N1,N2), red(N1), red(N2).\n")
-                .append(":- kept_edge(N1,N2), green(N1), green(N2).\n");
+        sb.append("blue(N) :- vertex(N), not red(N), not green(N).\n")
+                .append("red(N) :- vertex(N), not blue(N), not green(N).\n")
+                .append("green(N) :- vertex(N), not red(N), not blue(N).\n")
+                .append(":- vertex(N), not blue(N), not red(N), not green(N).\n")
+                .append(":- edge(N1,N2), blue(N1), blue(N2).\n")
+                .append(":- edge(N1,N2), red(N1), red(N2).\n")
+                .append(":- edge(N1,N2), green(N1), green(N2).\n");
 
         for (int i = 1; i <= numVertices; i++) {
             sb.append("vertex(").append(i).append(").\n");
@@ -62,5 +54,4 @@ public class NonPartitionDeletionDistanceColoring extends Generator {
         }
         return sb.toString();
     }
-
 }

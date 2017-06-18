@@ -24,6 +24,8 @@ public class GeneratorFactory {
                 return new NonPartitionDeletionDistanceColoring();
             case "reachability":
                 return new Reachability();
+            case "threecoloring":
+                return new ThreeColorability();
             default:
                 return null;
         }
