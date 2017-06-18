@@ -21,7 +21,7 @@ public class GroundExplosion extends Generator {
         for (String parameter : parameters) {
             int domainSize = Integer.parseInt(parameter);
             String instance = generateInstance(domainSize);
-            String fileName = "instance" + domainSize + ".lp";
+            String fileName = "instance" + domainSize + "_1.lp";
             writeInstanceToFile(instance, fileName);
         }
     }
