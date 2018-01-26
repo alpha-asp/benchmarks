@@ -1,6 +1,10 @@
 package alpha.benchmarks;
 
 import alpha.benchmarks.generators.*;
+import alpha.benchmarks.generators.aggregates.CountIndegRemove;
+import alpha.benchmarks.generators.aggregates.CountLazyGrowth;
+import alpha.benchmarks.generators.aggregates.CountLazyNormalization;
+import alpha.benchmarks.generators.aggregates.SumOverGuess;
 
 /**
  * Copyright (c) 2017, the Alpha Team.
@@ -26,6 +30,16 @@ public class GeneratorFactory {
                 return new Reachability();
             case "threecoloring":
                 return new ThreeColorability();
+            case "colorfulreachability":
+                return new ColorfulReachability();
+			case "agg:sumoverguess":
+				return new SumOverGuess();
+			case "agg:countlazygrowth":
+				return new CountLazyGrowth();
+			case "agg:countlazynormalization":
+				return new CountLazyNormalization();
+			case "agg:countindegremove":
+				return new CountIndegRemove();
             default:
                 return null;
         }
