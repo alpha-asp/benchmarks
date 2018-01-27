@@ -28,6 +28,11 @@ public class Main {
                 String[] config = confstring.split("\\s+");
                 String randomseed = lines.get(1).split("=")[1];
                 generate(config, Long.parseLong(randomseed));
+            } else if (args.length >= 2 && args[0].equals("tritonresultparser")) {
+                System.out.println("Parsing and transforming results from Triton benchmarks.");
+                for (int i = 1; i < args.length; i++) {
+                    TritonResultParser.parseResult(args[i]);
+                }
             } else {
                 generate(args, System.nanoTime());
             }

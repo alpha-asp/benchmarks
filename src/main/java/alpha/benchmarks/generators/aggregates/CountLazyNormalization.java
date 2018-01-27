@@ -30,6 +30,6 @@ public class CountLazyNormalization extends Generator {
 				"{ sel(X,Y) } :- sdom(X), sdom(Y)." +
 				"{ a;b }." +
 				":- a,b." +
-				(withoutAggregate ? "" : "num(K) :- 1 <= #count { X,Y : sel(X,Y)}, a,b,dom(K).");
+				(withoutAggregate ? "" : "num(K) :- K <= #count { X,Y : sel(X,Y)}, a, b, dom(K).");
 	}
 }
