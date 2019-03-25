@@ -8,7 +8,7 @@ import java.util.Arrays;
 /**
  * Copyright (c) 2018, the Alpha Team.
  */
-public class JustificationExponential extends Generator {
+public class JustificationProjection extends Generator {
 
 	@Override
 	public void generate(String[] parameters) throws IOException {
@@ -26,12 +26,9 @@ public class JustificationExponential extends Generator {
 
 	private String generateInstance(int domainSize) {
 		return "dom(1.." + domainSize + ").\n" +
-				"{q(X)} :- dom(X).\n" +
-				"p(X) :- q(X).\n" +
-				"r(X) :- q(X).\n" +
-				"p(X) :- r(X).\n" +
-				":- not p(5).\n" +
+				"{q(X,Y)} :- dom(X), dom(Y), X < Y.\n" +
+				"p(X) :- q(X,Y)." +
+				":- not p(5)." +
 				":- not p(7).\n";
 	}
-
 }

@@ -1,7 +1,7 @@
 package alpha.benchmarks.generators;
 
 import alpha.benchmarks.Generator;
-import javafx.util.Pair;
+import alpha.benchmarks.Pair;
 
 import java.io.IOException;
 import java.util.Arrays;

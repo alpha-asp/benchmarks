@@ -1,10 +1,10 @@
 package alpha.benchmarks;
 
 import alpha.benchmarks.generators.*;
-import alpha.benchmarks.generators.aggregates.CountIndegRemove;
-import alpha.benchmarks.generators.aggregates.CountLazyGrowth;
-import alpha.benchmarks.generators.aggregates.CountLazyNormalization;
-import alpha.benchmarks.generators.aggregates.SumOverGuess;
+import alpha.benchmarks.generators.aggregates.*;
+import alpha.benchmarks.generators.justification.JustificationExponential;
+import alpha.benchmarks.generators.justification.JustificationLocoMove;
+import alpha.benchmarks.generators.justification.JustificationProjection;
 
 /**
  * Copyright (c) 2017, the Alpha Team.
@@ -40,6 +40,20 @@ public class GeneratorFactory {
 				return new CountLazyNormalization();
 			case "agg:countindegremove":
 				return new CountIndegRemove();
+			case "agg:exponentialsizecount":
+				return new ExponentialSizeCount();
+			case "agg:connectedsubgraph":
+				return new ConnectedSubGraph();
+			case "agg:graphcolorcounting":
+				return new GraphColorCounting();
+			case "agg:simulation":
+				return new Simulation();
+			case "just:exponential":
+				return new JustificationExponential();
+			case "just:locomove":
+				return new JustificationLocoMove();
+			case "just:projection":
+				return new JustificationProjection();
             default:
                 return null;
         }

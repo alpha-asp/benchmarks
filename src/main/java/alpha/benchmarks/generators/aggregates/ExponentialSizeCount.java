@@ -1,4 +1,4 @@
-package alpha.benchmarks.generators.justification;
+package alpha.benchmarks.generators.aggregates;
 
 import alpha.benchmarks.Generator;
 
@@ -8,8 +8,7 @@ import java.util.Arrays;
 /**
  * Copyright (c) 2018, the Alpha Team.
  */
-public class JustificationExponential extends Generator {
-
+public class ExponentialSizeCount extends Generator {
 	@Override
 	public void generate(String[] parameters) throws IOException {
 		System.out.println("This generator expects: <numRandomInstancesPerSetting> [domainSize] ...");
@@ -25,13 +24,27 @@ public class JustificationExponential extends Generator {
 	}
 
 	private String generateInstance(int domainSize) {
-		return "dom(1.." + domainSize + ").\n" +
-				"{q(X)} :- dom(X).\n" +
-				"p(X) :- q(X).\n" +
-				"r(X) :- q(X).\n" +
-				"p(X) :- r(X).\n" +
-				":- not p(5).\n" +
-				":- not p(7).\n";
+		StringBuilder expVars = new StringBuilder();
+		for (int i = 1; i <= domainSize; i++) {
+			if (i == 1) {
+				expVars.append("X" + i);
+			} else {
+				expVars.append(", X" + i);
+			}
+		}
+		StringBuilder expSel = new StringBuilder();
+		for (int i = 1; i <= domainSize; i++) {
+			if (i == 1) {
+				expSel.append("exp(X" + i + ")");
+			} else {
+				expSel.append(", exp(X" + i + ")");
+			}
+		}
+		String program = "dom(0..1).\n" +
+				"{ a;b;c }.\n" +
+				":- a, b.\n" +
+				"exp(X) :- a,b, dom(X).\n" +
+				"holds :- 2 <= #count { " + expVars + " : " + expSel + " }.\n";
+		return program;
 	}
-
 }
